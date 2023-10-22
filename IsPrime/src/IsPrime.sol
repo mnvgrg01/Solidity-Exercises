@@ -7,5 +7,17 @@ contract IsPrime {
      */
     function isPrime(uint256 number) public view returns (bool) {
         // your code here
+        if (number <= 1) {
+            return true;
+        }
+        if (number == 2) {
+            return true;
+        }
+        for (uint256 i = 2; i * i < number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
