@@ -7,5 +7,18 @@ contract IsSorted {
      */
     function isSorted(uint256[] calldata arr) public view returns (bool) {
         // your code here
+        uint256 a;
+        uint256 b;
+        if (arr.length < 1) {
+            return false;
+        }
+        for (uint256 i = 1; i < arr.length; i++) {
+            a = arr[i - 1];
+            b = arr[i];
+            if (a > b) {
+                return false;
+            }
+        }
+        return true;
     }
 }
