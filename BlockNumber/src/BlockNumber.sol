@@ -10,8 +10,14 @@ contract BlockNumber {
      */
 
     address public lastCaller;
+    uint256 public blockNumber;
 
     function callMe() external {
         /// your code here
+        if (lastCaller != address(0)) {
+            require(blockNumber < block.number, "call reverted!!");
+        }
+        lastCaller = msg.sender;
+        blockNumber = block.number;
     }
 }

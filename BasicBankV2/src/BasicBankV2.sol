@@ -9,7 +9,7 @@ contract BasicBankV2 {
     /// @notice deposit ether into the contract
     /// @dev it should work properly when called multiple times
     function addEther() external payable {
-        balances[msg.sender] = balances[msg.sender] +  msg.value;
+        balances[msg.sender] += msg.value;
     }
 
     /// @notice used to withdraw ether from the contract
@@ -17,6 +17,7 @@ contract BasicBankV2 {
     function removeEther(uint256 amount) external payable {
         require(amount <= balances[msg.sender], "Can't withdraw more than deposited.");
         (bool ok , ) = msg.sender.call{value: amount}("");
+        balances[msg.sender] -= amount;
        require(ok ,"TRansacxtion failed");
     }
 }

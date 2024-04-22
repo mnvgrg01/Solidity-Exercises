@@ -19,5 +19,13 @@ contract ReducingPayout {
 
     function withdraw() public {
         // your code here
+        uint256 amount = address(this).balance;
+        uint256 elapsedSeconds = (block.timestamp - depositedTime); // Number of seconds passed since last deposit
+        uint256 famount = elapsedSeconds >= 86400
+            ? 0
+            : amount - ((elapsedSeconds * 0.0011574 ether) / 100);
+
+        (bool ok, ) = msg.sender.call{value: famount}("");
+        require(ok, "call failed");
     }
 }
